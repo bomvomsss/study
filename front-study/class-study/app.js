@@ -4,28 +4,25 @@ class Person {
       this.age = age;
       this.city = city;
   }
-  nextYearAge(){
-    return Number(this.age) + 1;
+  //메서드생성
+  nextYearAge() {
+      return Number(this.age) + 1;
   }
 }
 
-let kim = new Person('kim','24','seoul');
-kim.eat = function(){
-  return 'apple'
+class introducePerson extends Person {
+  constructor(name, age, city, futureHope) {
+      super(name, age, city);
+      this.futureHope = futureHope
+  }
+  introduce () {
+      return `저는 ${this.city}에 사는 ${this.name} 입니다. 
+      내년엔 ${super.nextYearAge()}살이며,
+      장래희망은 ${this.futureHope} 입니다.`
+  }
+
 }
 
-console.log('김씨 내년에는 몇살인가요 ?' + kim.nextYearAge());
-console.log('김씨가 먹은건? ' + kim.eat());
+let kim = new introducePerson('Kim','24','Seoul', '개발자');
 
-let park = new Person('park', '31', 'busan');
-
-console.log('박씨 내년에는 몇살인가요?' + park.nextYearAge());
-console.log('박씨가 먹은건?' + park.eat());
-// document.write(kim.name + '<br/>');
-// document.write(kim.age + '<br/>');
-// document.write(kim.city);
-
-// console.log(kim);
-// console.log(kim.nextYearAge());
-// console.log(kim.eat());
-
+console.log(kim.introduce());
