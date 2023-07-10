@@ -4,7 +4,7 @@ class Person {
       this.age = age;
       this.city = city;
   }
-  //메서드생성
+  //메소드생성
   nextYearAge() {
       return Number(this.age) + 1;
   }
