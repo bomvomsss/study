@@ -15,7 +15,7 @@ class Item {
 
     const DeleteButton = document.createElement("button");
     
-    DeleteButton.innerText = "삭제";
+    DeleteButton.innerText = "-";
     DeleteButton.addEventListener("click", () => {
       memoList.removeChild(div); // memoList.remove(div)로 하면 한 번 삭제 버튼 누른 뒤에 메모추가가 안됨
     });
