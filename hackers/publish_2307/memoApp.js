@@ -10,7 +10,7 @@ class Item {
   newmemo(memo) {
     const div = document.createElement("div");
     const Input = document.createElement("input");
-    Input.value = memo || localStorage.getItem("memoData") || "";
+    Input.value = memo;
     Input.disabled = true;
 
     const DeleteButton = document.createElement("button");
@@ -21,30 +21,48 @@ class Item {
     });
     DeleteButton.classList.add("delete-button");
     
-    const CorrectButton = document.createElement("button");
-    CorrectButton.innerText = "수정";
-    CorrectButton.addEventListener("click", () => {
-      if(CorrectButton.disabled){
+    //수정버튼
+    const ChangeButton = document.createElement("button");
+    ChangeButton.innerText = "수정";
+    ChangeButton.addEventListener("click", () => {
+      if(Input.disabled){
         Input.disabled = false;
-        CorrectButton.innerText = "완료";
+        ChangeButton.innerText = "완료";
       }else{
         Input.disabled = true;
-        CorrectButton.innerText = "수정";                                                            
+        ChangeButton.innerText = "수정";
       }
+    });
+
+    //라벨 추가
+    const AddLabelButton = document.createElement("button");
+    AddLabelButton.innerText = "라벨 추가";
+    AddLabelButton.addEventListener("click", () => {
+      console.log('click');
+      const AddLabelText = document.createElement("input");
       
+      const SubmitLabelText = document.createElement("button");
+      SubmitLabelText.innerText = "확인";
+
+      SubmitLabelText.addEventListener("click", () => {
+        //라벨입력했을때
+        
+      })
+
+      div.append(AddLabelText, SubmitLabelText);
+      // AddLabelText.disabled = false;
+      // AddLabelText.setAttribute("placeholder","라벨을 입력하세요");
     })
 
-    div.append(Input, DeleteButton, CorrectButton);
+    div.append(Input, DeleteButton, ChangeButton, AddLabelButton);
     memoList.appendChild(div); // memoList.append(div);도 가능
-
   }
-}
+};
+//우선순위 속성
 
 const checkInput = () => {
   const input = document.getElementById("memo-text");
   if (input.value !== "") {
-    //로컬스토리지에 저장
-    localStorage.setItem("memoData", input.value);
     new Item(input.value);
   }
   input.value = "";
