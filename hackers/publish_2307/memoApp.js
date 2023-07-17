@@ -97,6 +97,7 @@ const deletememos = () => {
   localStorage.removeItem("memos"); // key와 value 모두 삭제하기
 };
 
+// local storage에 저장하기
 const saveMemos = () => {
   const memoItems = Array.from(memoList.children);
   const memos = memoItems.map((item) => {
@@ -106,6 +107,7 @@ const saveMemos = () => {
   localStorage.setItem("memos", JSON.stringify(memos));
 };
 
+// local storage에서 불러오기
 const loadMemos = () => {
   const savedMemos = localStorage.getItem("memos");
   if (savedMemos) {
@@ -118,5 +120,5 @@ const loadMemos = () => {
 
 RemoveAllButton.addEventListener("click", deletememos);
 AddmemoButton.addEventListener("click", checkInput);
-
+// 새로고침하면 local storage에 저장된 메모리 불러오기
 window.addEventListener("load", loadMemos);
