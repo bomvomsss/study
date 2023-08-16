@@ -16,19 +16,19 @@ class Item {
     Input.disabled = true;
 
     const DeleteButton = document.createElement("button");
-    
+
     DeleteButton.innerText = "삭제";
     DeleteButton.addEventListener("click", () => {
-      memoList.removeChild(div); // memoList.remove(div)로 하면 한 번 삭제 버튼 누른 뒤에 메모추가가 안됨
+      memoList.removeChild(div); // memoList.remove(div)로 하면 한 번 삭제 버튼 누른 뒤에 메모추가가 안됨 -> why?
       saveMemos();
     });
     DeleteButton.classList.add("delete-button");
-    
+
     //수정버튼
     const EditButton = document.createElement("button");
     EditButton.innerText = "수정";
     EditButton.addEventListener("click", () => {
-      if(Input.disabled == false){
+      if (Input.disabled == false) {
         EditButton.innerText = "수정";
         Input.disabled = true;
         saveMemos();
@@ -42,17 +42,17 @@ class Item {
     //라벨 추가
     const AddLabelButton = document.createElement("button");
     AddLabelButton.innerText = "라벨 추가";
-    
+
     AddLabelButton.addEventListener("click", () => {
       const AddLabelText = document.createElement("input");
       AddLabelText.classList.add("label-input");
-      
+
       const SubmitLabelText = document.createElement("button");
       SubmitLabelText.innerText = "확인";
-      
+
       SubmitLabelText.addEventListener("click", () => {
         //라벨입력했을때
-        if(AddLabelText.value !== ""){
+        if (AddLabelText.value !== "") {
           const Label = document.createElement("span");
           Label.classList.add("label");
 
@@ -65,12 +65,13 @@ class Item {
 
           const labelContent = AddLabelText.value;
           Label.innerText = labelContent;
-        }//라벨입력
+        }
+        //라벨입력
       })
 
       div.append(AddLabelText, SubmitLabelText);
       AddLabelText.disabled = false;
-      AddLabelText.setAttribute("placeholder","라벨을 입력하세요");
+      AddLabelText.setAttribute("placeholder", "라벨을 입력하세요");
     })
 
     div.append(Input, DeleteButton, EditButton, AddLabelButton);
@@ -120,5 +121,4 @@ const loadMemos = () => {
 
 RemoveAllButton.addEventListener("click", deletememos);
 AddmemoButton.addEventListener("click", checkInput);
-// 새로고침하면 local storage에 저장된 메모리 불러오기
-window.addEventListener("load", loadMemos);
+window.addEventListener("load", loadMemos);// 새로고침하면 local storage에 저장된 메모리 불러오기

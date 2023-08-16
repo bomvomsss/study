@@ -23,6 +23,8 @@ h1{color:#fff;}
 }
 #memo-text{
   width:260px;
+  padding-left:10px;
+  box-sizing:border-box;
 }
 .input-wrap .btn-box{
   text-align:right;
@@ -38,6 +40,8 @@ h1{color:#fff;}
 .memo-cont{
   width:260px;height:40px;
   margin-right:13px;
+  padding-left:10px;
+  box-sizing:border-box;
 }
 .memo-wrap{
   margin-bottom:5px;
