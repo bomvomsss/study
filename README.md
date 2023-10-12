@@ -12,9 +12,14 @@
 ## 📌 front-study
 - 프론트엔드 공부
 - 2022-11~
-
-
+  ### memoApp
+  - 리액트를 사용하여 메모 앱 만들기
+  ### coding-apple
+  - 수강 기록
+  - 2023-10-12~ 
 ## 📌 Javascript
 - 자바스크립트 독학
-### programmers
-- 프로그래머스 코딩테스트 풀이 정리
+  ### programmers
+  - 프로그래머스 코딩테스트 풀이 정리
+  ### class-study
+  - class 문법 공부
