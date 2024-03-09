@@ -1,0 +1,8 @@
+{
+  "editor.fontSize": 13,
+  "editor.fontWeight": "normal",
+  "editor.colorDecorators": true,
+  "editor.tokenColorCustomizations": {},
+  "workbench.colorTheme": "Default Dark+",
+  "workbench.preferredDarkColorTheme": "Default Dark Modern"
+}
