@@ -5,6 +5,7 @@ function App() {
   let [tit, setTit] = useState(['남자 코트 추천', '강남 우동 맛집', '파이썬 독학']);
   let [like, setLike] = useState([0,0,0]);
   let [modal, setModal]= useState(false);
+  let [title, setTitle] = useState(0);
 
   let change = () => {
     let copy = [...tit];
@@ -53,7 +54,13 @@ function App() {
         tit.map((a, i)=>{
           return (
             <div className="list" key={i}>
-              <h4 onClick={()=>{ setModal(!modal) }}> { a } </h4>
+              <h4 onClick={
+                ()=>{
+                  setModal(!modal)
+                  setTitle(i)
+                  }
+                }>{ a }
+              </h4>
               <span 
               onClick={() => {
                 let likeNum = [...like];
@@ -70,19 +77,20 @@ function App() {
       }
 
       {  
-        modal == true ? <Modal/> : null
+        modal === true ? <Modal title={title} color={'yellow'} tit={tit} change={change}/> : null
       }
 
     </div>
   );
 }
 
-let Modal = () => {
+let Modal = (props) => {
   return(
-    <div className="modal">
-      <h4>제목</h4>
+    <div className="modal" style={{background:props.color}}>
+      <h4>{props.tit[props.title]}</h4>
       <p>날짜</p>
       <p>상세내용</p>
+      <button onClick={props.change}>글수정</button>
     </div>
   )
 }
