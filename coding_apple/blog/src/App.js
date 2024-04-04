@@ -6,6 +6,7 @@ function App() {
   let [like, setLike] = useState([0,0,0]);
   let [modal, setModal]= useState(false);
   let [title, setTitle] = useState(0);
+  let [data, setData] = useState('');
 
   let change = () => {
     let copy = [...tit];
@@ -13,14 +14,26 @@ function App() {
     setTit(copy);
   }
 
-  let likeBtn = () => { 
-    setLike(like+1);
-  }
-
   let sort = () => {
     let copy2 = [...tit];
     copy2.sort();
     setTit(copy2);
+  }
+
+  let saveData = (e) => {
+    setData(e.target.value);
+  }
+
+  let newTit = () => {
+    let copy3 = [...tit];
+    copy3.push(data);//맨 아래에 생성
+    //copy3.unshift(data); 맨 위에 생성
+    setTit(copy3);
+  }
+
+  let reset = () => {
+    let select = document.querySelector('.list');
+    select.remove();
   }
 
   return (
@@ -31,52 +44,37 @@ function App() {
 
       <button onClick={change}>변신</button>
       <button onClick={sort}>가나다순정렬</button>
-
-      {/* <div className="list">
-        <h4>{tit[0]} <span onClick={like} >👍</span> {like} </h4>    
-        <p>2월 17일 발행</p>
-      </div>
-      <div className="list">
-        <h4>{tit[1]}</h4>
-        <p>2월 17일 발행</p>
-      </div>
-      <div className="list">
-        <h4 
-        onClick={()=>{
-          modal == true ? setModal(false) : setModal(true)
-          //setModal(!modal) 이렇게도 가능
-        }}
-        >{tit[2]}</h4>
-        <p>2월 17일 발행</p>
-      </div> */}
-      
       {
         tit.map((a, i)=>{
           return (
             <div className="list" key={i}>
-              <h4 onClick={
-                ()=>{
-                  setModal(!modal)
-                  setTitle(i)
-                  }
-                }>{ a }
+              <h4 onClick={()=>{
+                setModal(!modal)
+                setTitle(i)
+                }}>{a}
+                <span onClick={(e) => {
+                  e.stopPropagation();
+                  let likeNum = [...like];
+                  likeNum[i]++;
+                  setLike(likeNum);
+                }}> 👍 {like[i]}</span>
               </h4>
-              <span 
-              onClick={() => {
-                let likeNum = [...like];
-                likeNum[i]++;
-                setLike(likeNum);
-              }}
-              > 👍 
-              {like[i]}
-              </span>
               <p>2월 17일 발행</p>
+              <button onClick={reset} type="button">삭제</button>
             </div>
           )
         })
       }
 
-      {  
+      <div>
+
+        <input type="text" onChange={saveData} />
+        <button type="submit" 
+          onClick={newTit}
+        >작성하기</button>
+      </div>
+
+      {
         modal === true ? <Modal title={title} color={'yellow'} tit={tit} change={change}/> : null
       }
 
@@ -94,14 +92,4 @@ let Modal = (props) => {
     </div>
   )
 }
-// function Modal(){
-//   return(
-//     <div className="modal">
-//       <h4>제목</h4>
-//       <p>날짜</p>
-//       <p>상세내용</p>
-//     </div>
-//   )
-// }
-
 export default App
