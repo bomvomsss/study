@@ -22,6 +22,14 @@ const data = [
     content : "Born in the States",
     price : 130000,
     src : "https://codingapple1.github.io/shop/shoes3.jpg"
+  },
+// 데이터 추가 테스트
+  {
+    id : 3,
+    title : "Optional",
+    content : "Born in the States",
+    price : 130000,
+    src : "https://codingapple1.github.io/shop/shoes3.jpg"
   }
 ];
 

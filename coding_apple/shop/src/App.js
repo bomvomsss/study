@@ -23,7 +23,13 @@ function App() {
       </Navbar>
       <div className="main-bg"></div>
       <Container>
-        <Item data={shoes}></Item>
+        <div className='row'>
+          {shoes.map((shoes,index) => {
+            return (
+              <Item shoes={shoes} id={index}></Item>
+            );
+          })} 
+        </div>
       </Container>
     </div>
   );
