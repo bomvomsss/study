@@ -1,12 +1,12 @@
-import {useState} from 'react';
-import { Navbar, Container, Nav, Row, Col } from 'react-bootstrap';
+import { useState } from 'react';
+import { Navbar, Container, Nav } from 'react-bootstrap';
 import './App.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import data from './data.js';
+import Item from './Item.js';
 
 function App() {
-
-  let [shoes] = useState(data);
+  const [shoes] = useState(data);
 
   return (
     <div className="App">
@@ -23,24 +23,8 @@ function App() {
       </Navbar>
       <div className="main-bg"></div>
       <Container>
-      <Row>
-        <Col>
-          <img src="https://codingapple1.github.io/shop/shoes1.jpg" alt="" width="80%"/>
-          <h4 id={1} >shoes</h4>
-          <p>상품설명</p>
-        </Col>
-        <Col>
-          <img src="https://codingapple1.github.io/shop/shoes2.jpg" alt="" width="80%"/>
-          <h4>상품명</h4>
-          <p>상품설명</p>
-        </Col>
-        <Col>
-          <img src="https://codingapple1.github.io/shop/shoes3.jpg" alt="" width="80%"/>
-          <h4>상품명</h4>
-          <p>상품설명</p>
-        </Col>
-      </Row>
-    </Container>
+        <Item data={shoes}></Item>
+      </Container>
     </div>
   );
 }
