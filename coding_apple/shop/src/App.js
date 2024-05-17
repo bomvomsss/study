@@ -8,6 +8,7 @@ import { Routes, Route, Link, useNavigate, Outlet } from 'react-router-dom';
 import Detail from './pages/Detail.js';
 
 function App() {
+
   const [shoes] = useState(data);
   const navigate = useNavigate(); //페이지 이동 기능 
 
@@ -41,7 +42,7 @@ function App() {
         </div>
         }/>
 
-        <Route path='/detail' element={<Detail/>}/>
+        <Route path='/detail/:id' element={<Detail shoes={shoes}/>}/>
 
         <Route path='/event' element={<Event/>}>
           <Route path='one' element={<div>첫 주문시 양배추즙 서비스</div>}/>
