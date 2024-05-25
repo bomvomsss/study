@@ -8,9 +8,14 @@ import { Routes, Route, Link, useNavigate, Outlet } from 'react-router-dom';
 import Detail from './pages/Detail.js';
 
 function App() {
-
-  const [shoes] = useState(data);
-  const navigate = useNavigate(); //페이지 이동 기능 
+  
+  const [shoes, setShoes] = useState(data);
+  const navigate = useNavigate(); //페이지 이동 기능
+  
+  const sortShoes = () => {
+    const sortedShoes = shoes.slice().sort((a,b) => a.id - b.id);
+    setShoes(sortedShoes);
+  }
 
   return (
     <div className="App"> 
@@ -32,11 +37,12 @@ function App() {
           <div className="main-bg"></div>
           <Container>
             <div className='row'>
+              <button onClick={sortShoes}>정렬</button>
               {shoes.map((shoes,index) => {
                 return (
                   <Item shoes={shoes} id={index}></Item>
                 );
-              })} 
+              })}
             </div>
           </Container>
         </div>
