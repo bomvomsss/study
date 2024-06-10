@@ -6,6 +6,7 @@ import data from './data.js';
 import Item from './Item.js';
 import { Routes, Route, Link, useNavigate, Outlet } from 'react-router-dom';
 import Detail from './pages/Detail.js';
+import axios from 'axios'
 
 function App() {
   
@@ -45,6 +46,20 @@ function App() {
               })}
             </div>
           </Container>
+            <button onClick={()=>{
+              axios.get('https://codingapple1.github.io/shop/data2.json')
+              .then((result)=>{
+                let newData = [...data, ...result.data]
+                setShoes(newData)
+                console.log(result.data)
+              })
+              .catch(()=>{
+                console.log('데이터 로딩 실패')
+              })
+
+              axios.post('/safdfas', {name : 'kim'})
+              
+            }}>더보기</button>
         </div>
         }/>
 
