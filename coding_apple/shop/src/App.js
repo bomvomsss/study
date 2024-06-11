@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { Container, Nav, Navbar } from 'react-bootstrap';
 import './App.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
@@ -9,9 +9,46 @@ import Detail from './pages/Detail.js';
 import axios from 'axios'
 
 function App() {
+  let [shoes, setShoes] = useState(data);
+  let [count, setCount] = useState(0);
+  let [loading, setLoading] = useState(false);
+  let [warnpop, setWarnpop] = useState(false);
   
-  const [shoes, setShoes] = useState(data);
-  const navigate = useNavigate(); //페이지 이동 기능
+  let navigate = useNavigate(); //페이지 이동 기능
+
+  let clickBtn = () => {
+    setCount(count + 1)
+  }
+
+  let moreProduct = () => {
+    setLoading(true)
+
+    let url;
+    if(count === 1){
+      url = 'https://codingapple1.github.io/shop/data2.json'
+    } else if(count === 2){
+      url = 'https://codingapple1.github.io/shop/data3.json'
+    } else if (count > 2){
+      setWarnpop(true)
+      setLoading(false)
+      return;
+    }
+
+    axios.get(url)
+      .then((result)=>{
+        let baseData = result.data
+        let newData = [...shoes , ...baseData]
+        setShoes(newData)
+        setLoading(false)
+      })
+      .catch(()=>{ console.log('데이터 로딩 실패') })
+  }
+
+  useEffect(() => {
+    if(count !== 0){
+      moreProduct();
+    }
+  }, [count]);
   
   const sortShoes = () => {
     const sortedShoes = shoes.slice().sort((a,b) => a.id - b.id);
@@ -46,23 +83,11 @@ function App() {
               })}
             </div>
           </Container>
-            <button onClick={()=>{
-              axios.get('https://codingapple1.github.io/shop/data2.json')
-              .then((result)=>{
-                let newData = [...data, ...result.data]
-                setShoes(newData)
-                console.log(result.data)
-              })
-              .catch(()=>{
-                console.log('데이터 로딩 실패')
-              })
-
-              axios.post('/safdfas', {name : 'kim'})
-              
-            }}>더보기</button>
+          {loading && <Loading/>}
+          {warnpop && <WarnPop />}
+          <button onClick={()=>{ clickBtn(); }}>더보기</button>
         </div>
         }/>
-
         <Route path='/detail/:id' element={<Detail shoes={shoes}/>}/>
 
         <Route path='/event' element={<Event/>}>
@@ -81,6 +106,22 @@ function Event(){
     <div>
       <h4>오늘의 이벤트</h4>
       <Outlet></Outlet>
+    </div>
+  )
+}
+
+function Loading(){
+  return(
+    <div className="alert alert-warning">
+      상품로딩중
+    </div>
+  )
+}
+
+function WarnPop(){
+  return(
+    <div className='alert alert-warning'>
+      더이상 상품이 없습니다.
     </div>
   )
 }
