@@ -1,6 +1,6 @@
 import {useParams} from 'react-router-dom';
 import { useEffect, useState } from 'react';
-import {Nav, NavItem, NavLink} from 'react-bootstrap'
+import { Nav } from 'react-bootstrap'
 
 function Detail(props){
   const {id} = useParams();
@@ -67,6 +67,17 @@ function Detail(props){
 }
 
 function TabContent({tab}){
+  
+  let [fade, setFade] = useState('');
+
+  useEffect(()=>{ 
+    setTimeout(()=>{ setFade('end') }, 100)
+    
+    return ()=>{
+      setFade('')
+    }
+  }, [tab]) 
+  
   // if( tab===0 ){
   //   return <div>content 0</div>
   // }else if( tab===1 ){
@@ -74,7 +85,9 @@ function TabContent({tab}){
   // }else if( tab ===2 ){
   //   return <div>content 2</div>
   // }
-  return [<div>content 0</div>, <div>content 1</div>, <div>content 2</div>][tab]
+  return (<div className={'start ' + fade}>
+    { [<div>content 0</div>, <div>content 1</div>, <div>content 2</div>][tab] }
+  </div>)
 }
 
 export default Detail;

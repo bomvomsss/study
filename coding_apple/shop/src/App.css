@@ -14,3 +14,16 @@ h4{
 .opacity{
   display:none;
 }
+
+.App .row a{
+  color:black;
+  text-decoration:none;
+}
+
+.start{
+  opacity:0;
+}
+.end{
+  opacity:1;
+  transition: opacity 0.5s;
+}

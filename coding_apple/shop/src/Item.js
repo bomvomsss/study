@@ -1,6 +1,8 @@
+
 function Item(props){
+
   return(
-    <div className='col-md-4'>
+    <div>
       <img src={props.shoes.src} alt="" width="80%"/>
       <h4>{props.shoes.title}</h4>
       <p>{props.shoes.content}</p>

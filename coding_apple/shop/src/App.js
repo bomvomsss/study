@@ -74,11 +74,13 @@ function App() {
         <div>
           <div className="main-bg"></div>
           <Container>
+            <button onClick={sortShoes}>정렬</button>
             <div className='row'>
-              <button onClick={sortShoes}>정렬</button>
               {shoes.map((shoes,index) => {
                 return (
-                  <Item shoes={shoes} id={index}></Item>
+                  <Link to={`/detail/${index}`} className='col-md-4'>
+                    <Item shoes={shoes} id={index}></Item>
+                  </Link>
                 );
               })}
             </div>
