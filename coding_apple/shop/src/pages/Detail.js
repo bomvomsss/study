@@ -8,22 +8,32 @@ function Detail(props){
   let [box, setBox] = useState(true);
   let [num, setNum] = useState('');
   let [tab, setTab] = useState(0);
-
+  let [load, setLoad] = useState(false);
+  
   useEffect(()=>{
     let a = setTimeout(() => { setBox(false) }, 2000) // 타이머
     return ()=>{
       clearTimeout(a)
     }
   }, [])
+
+  useEffect(()=>{
+    let b = setTimeout(()=>{ setLoad('end') }, 100)
+
+    return ()=>{
+      clearTimeout(b)
+      setLoad('')
+    }
+  }, [])
   
- useEffect(()=>{
-  if(isNaN(num) === true){
-    alert('그러지마세요')
-  }
+  useEffect(()=>{
+    if(isNaN(num) === true){
+      alert('그러지마세요')
+    }
   }, [num])
   
   return(
-  <div className="container">
+  <div className={ 'container start '+load }>
     {
       box === true
       ? <div className='alert alert-warning'>
@@ -60,13 +70,13 @@ function Detail(props){
       </Nav.Item>
     </Nav>
     {/* { tab === 0 ? <div>내용0</div> : null } */}
-    <TabContent tab={tab}/>
-
+    <TabContent shoes={props.shoes} tab={tab}/>
   </div>
+
   )
 }
 
-function TabContent({tab}){
+function TabContent({tab, shoes}){
   
   let [fade, setFade] = useState('');
 
@@ -76,17 +86,10 @@ function TabContent({tab}){
     return ()=>{
       setFade('')
     }
-  }, [tab]) 
+  }, [tab])
   
-  // if( tab===0 ){
-  //   return <div>content 0</div>
-  // }else if( tab===1 ){
-  //   return <div>content 1</div>
-  // }else if( tab ===2 ){
-  //   return <div>content 2</div>
-  // }
   return (<div className={'start ' + fade}>
-    { [<div>content 0</div>, <div>content 1</div>, <div>content 2</div>][tab] }
+    { [<div>{shoes[0].title}</div>, <div>content 1</div>, <div>content 2</div>][tab] }
   </div>)
 }
 
