@@ -1,20 +1,21 @@
-import { useEffect, useState } from 'react';
-import { Container, Nav, Navbar } from 'react-bootstrap';
-import './App.css';
-import 'bootstrap/dist/css/bootstrap.min.css';
-import data from './data.js';
-import Item from './Item.js';
-import { Routes, Route, Link, useNavigate, Outlet } from 'react-router-dom';
-import Detail from './pages/Detail.js';
+import { useEffect, useState } from 'react'
+import { Container, Nav, Navbar } from 'react-bootstrap'
+import './App.css'
+import 'bootstrap/dist/css/bootstrap.min.css'
+import data from './data.js'
+import Item from './Item.js'
+import { Routes, Route, Link, useNavigate, Outlet } from 'react-router-dom'
+import Detail from './pages/Detail.js'
+import Cart from './pages/Cart.js'
 import axios from 'axios'
 
 function App() {
-  let [shoes, setShoes] = useState(data);
-  let [count, setCount] = useState(0);
-  let [loading, setLoading] = useState(false);
-  let [warnpop, setWarnpop] = useState(false);
+  let [shoes, setShoes] = useState(data)
+  let [count, setCount] = useState(0)
+  let [loading, setLoading] = useState(false)
+  let [warnpop, setWarnpop] = useState(false)
   
-  let navigate = useNavigate(); //페이지 이동 기능
+  let navigate = useNavigate() //페이지 이동 기능
 
   let clickBtn = () => {
     setCount(count + 1)
@@ -91,6 +92,7 @@ function App() {
         </div>
         }/>
         <Route path='/detail/:id' element={<Detail shoes={shoes}/>}/>
+        <Route path='/cart' element={<Cart />}/>
 
         <Route path='/event' element={<Event/>}>
           <Route path='one' element={<div>첫 주문시 양배추즙 서비스</div>}/>
@@ -100,7 +102,7 @@ function App() {
       </Routes>
 
     </div>
-  );
+  )
 }
 
 function Event(){
