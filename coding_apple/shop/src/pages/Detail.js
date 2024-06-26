@@ -1,6 +1,8 @@
 import {useParams} from 'react-router-dom';
 import { useEffect, useState } from 'react';
 import { Nav } from 'react-bootstrap'
+import { addItem } from '../store.js'
+import { useDispatch } from 'react-redux';
 
 function Detail(props){
   const {id} = useParams();
@@ -9,6 +11,7 @@ function Detail(props){
   let [num, setNum] = useState('');
   let [tab, setTab] = useState(0);
   let [load, setLoad] = useState(false);
+  let dispatch = useDispatch()
   
   useEffect(()=>{
     let a = setTimeout(() => { setBox(false) }, 2000) // 타이머
@@ -54,7 +57,10 @@ function Detail(props){
 
         <p><input id="test-target" onChange={(e)=>{setNum(e.target.value)}}/></p>
         
-        <button className="btn btn-danger">주문하기</button> 
+        <button className="btn btn-danger" onClick={() => {
+          dispatch(addItem(props.shoes[id]))
+          // console.log(props.shoes[id])
+        }}>주문하기</button>
       </div>
     </div>
 
