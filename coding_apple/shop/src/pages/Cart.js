@@ -1,6 +1,6 @@
 import {Table} from 'react-bootstrap'
 import {useDispatch, useSelector} from 'react-redux'
-import {changeName, changeAge, addCount} from '../store.js'
+import {changeName, changeAge, addCount, removeItem} from '../store.js'
 
 function Cart(){
 
@@ -31,9 +31,13 @@ function Cart(){
                 <td>{firState.cart[i].id}</td>
                 <td>{firState.cart[i].name}</td>
                 <td>{firState.cart[i].count}</td>
-                <td><button onClick={()=>{
-                  dispatch(addCount(firState.cart[i].id))
-                }}>+</button>
+                <td>
+                  <button onClick={()=>{
+                    dispatch(addCount(firState.cart[i].id))
+                  }}>+</button> <button onClick={()=>{
+                    dispatch(removeItem(i)) 
+                  }}
+                  >🗑️</button>
                 </td>
               </tr>
             )

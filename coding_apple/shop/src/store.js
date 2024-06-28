@@ -25,13 +25,18 @@ let cart = createSlice({
       let num = state.findIndex((a)=>{ return a.id === action.payload })
       state[num].count++
     },
-    // addItem(state, action){
-    //   let item = state.
-    //   state.push(item)
-    // }
+    addItem(state, action){
+      let item = action.payload
+      console.log(item)
+      return [...state, item]
+    },
+    removeItem(state, action){
+      let num = state.findIndex((a)=>{ return a.id === action.payload })
+      state.splice(num, 1)
+    }
   }
 })
-export let { addCount, addItem } = cart.actions
+export let { addCount, addItem, removeItem } = cart.actions
 
 export default configureStore({
   reducer: {

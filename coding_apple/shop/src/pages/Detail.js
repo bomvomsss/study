@@ -58,8 +58,7 @@ function Detail(props){
         <p><input id="test-target" onChange={(e)=>{setNum(e.target.value)}}/></p>
         
         <button className="btn btn-danger" onClick={() => {
-          dispatch(addItem(props.shoes[id]))
-          // console.log(props.shoes[id])
+          dispatch(addItem({id, name:props.shoes[id].title, count:1}))
         }}>주문하기</button>
       </div>
     </div>
