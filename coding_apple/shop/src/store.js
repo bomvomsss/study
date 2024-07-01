@@ -27,8 +27,15 @@ let cart = createSlice({
     },
     addItem(state, action){
       let item = action.payload
-      console.log(item)
-      return [...state, item]
+      console.log(item.id)
+
+      let chk = state.findIndex((i) => {
+        return i.id === action.payload.id})
+      if(chk > 0){
+        state[chk].count++
+      }else{
+        return [...state, item]
+      }
     },
     removeItem(state, action){
       let num = state.findIndex((a)=>{ return a.id === action.payload })
