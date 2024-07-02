@@ -11,8 +11,17 @@ function Detail(props){
   let [num, setNum] = useState('');
   let [tab, setTab] = useState(0);
   let [load, setLoad] = useState(false);
+  let [watch, setWatch] = useState([])
   let dispatch = useDispatch()
   
+  useEffect(()=>{
+    localStorage.setItem('watch', JSON.stringify([]))
+    let info = JSON.parse(localStorage.getItem('watch'))
+    info.push(id)
+    let fin = localStorage.setItem('watch', JSON.stringify(info))
+    setWatch(fin)
+},[])
+
   useEffect(()=>{
     let a = setTimeout(() => { setBox(false) }, 2000) // 타이머
     return ()=>{
@@ -44,7 +53,7 @@ function Detail(props){
         </div>
         : null 
     }
-    {count} 
+    {count}
     <button onClick={()=>{setCount(count+1)}}>up</button>
     <div className="row">
       <div className="col-md-6">
