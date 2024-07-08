@@ -11,16 +11,17 @@ function Detail(props){
   let [num, setNum] = useState('');
   let [tab, setTab] = useState(0);
   let [load, setLoad] = useState(false);
-  let [watch, setWatch] = useState([])
   let dispatch = useDispatch()
+  let thisItem = props.shoes.find(x => x.id == id)
   
   useEffect(()=>{
-    localStorage.setItem('watch', JSON.stringify([]))
-    let info = JSON.parse(localStorage.getItem('watch'))
-    info.push(id)
-    let fin = localStorage.setItem('watch', JSON.stringify(info))
-    setWatch(fin)
-},[])
+    let output = localStorage.getItem('watch')
+    output = JSON.parse(output)
+    output.push(thisItem.id)
+    output = new Set(output)
+    output = Array.from(output)
+    localStorage.setItem('watch', JSON.stringify(output))
+  },[])
 
   useEffect(()=>{
     let a = setTimeout(() => { setBox(false) }, 2000) // 타이머
@@ -57,7 +58,7 @@ function Detail(props){
     <button onClick={()=>{setCount(count+1)}}>up</button>
     <div className="row">
       <div className="col-md-6">
-        <img src={props.shoes[id].src} width="100%" alt=""/>
+        <img src={`https://codingapple1.github.io/shop/shoes${props.shoes[id].id + 1}.jpg`} width="100%" alt=""/>
       </div>
       <div className="col-md-6">
         <h4 className="pt-5">{props.shoes[id].title}</h4>

@@ -27,3 +27,27 @@ h4{
   opacity:1;
   transition: opacity 0.5s;
 }
+.recent{
+  position:fixed;
+  top:40%;right:5%;
+  background:skyblue;
+  padding:15px 10px;
+}
+.recent *{
+  color:black;
+  text-decoration:none;
+}
+.recent p{
+  font-size:20px;
+  font-weight:bold;
+  text-align:cetner;
+}
+.recent ul{
+  margin:0;
+  padding:0;
+}
+.recent ul li{
+  text-align:left;
+  list-style:none;
+  padding:5px 15px;
+}
