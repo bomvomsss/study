@@ -30,7 +30,7 @@ h4{
 .recent{
   position:fixed;
   top:40%;right:5%;
-  background:skyblue;
+  background:#d3f2ffdb;
   padding:15px 10px;
 }
 .recent *{

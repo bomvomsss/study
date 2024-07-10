@@ -14,17 +14,18 @@ function App() {
   let [count, setCount] = useState(0);
   let [loading, setLoading] = useState(false);
   let [warnpop, setWarnpop] = useState(false);
-
   
   useEffect(() => {
-    let info = JSON.parse(localStorage.getItem("watch"))
-    if (info.length == 0) {
+    let check = localStorage.getItem("watch");
+    let info = JSON.parse(check)
+
+    if(check === null || info.length === 0){
       localStorage.setItem("watch", JSON.stringify([]));
-    } else {
+    }else{
       return;
     }
-  });
-
+  },[]);
+  
   let watchedArr = JSON.parse(localStorage.getItem("watch"))
 
   let navigate = useNavigate(); //페이지 이동 기능
@@ -125,7 +126,7 @@ function App() {
                 <div className="recent">
                   <p>최근 본 상품</p>
                   <ul>
-                    {watchedArr.map((a, i)=>{
+                    {watchedArr && watchedArr.map((a, i)=>{
                       return(
                         <li>
                           <Link to={`/detail/${i}`}>
