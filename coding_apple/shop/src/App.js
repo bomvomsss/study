@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { Container, Nav, Navbar, ListGroup } from "react-bootstrap";
+import { Container, Nav, Navbar } from "react-bootstrap";
 import "./App.css";
 import "bootstrap/dist/css/bootstrap.min.css";
 import data from "./data.js";
@@ -30,7 +30,7 @@ function App() {
 
   let result = useQuery(['dataFrom'], ()=>
     axios.get('https://codingapple1.github.io/userdata.json').then((a)=>{
-      console.log('요청됨')
+      // console.log('요청됨')
       return a.data
     }),
     { staleTime : 2000 }
@@ -134,6 +134,7 @@ function App() {
             <div>
               <div className="main-bg"></div>
               <Container>
+                <Popup></Popup>
                 <div className="recent">
                   <p>최근 본 상품</p>
                   <ul>
@@ -194,6 +195,29 @@ function Loading() {
 
 function WarnPop() {
   return <div className="alert alert-warning">더이상 상품이 없습니다.</div>
+}
+
+function Popup(){
+  let [count, setCount] = useState(0);
+  let [age, setAge] = useState(20);
+
+  useEffect(()=>{
+    if(count !== 0 && count < 3){
+      setAge(age + 1);
+    }
+  },[count])
+
+  return(
+    <div>
+      <div>안녕하십니까 전 {age}</div>
+      <div>{count}</div>
+      <button onClick={()=>{
+        setCount(count+1);
+        console.log(count)
+      }}>누르면한살먹기</button>
+      
+    </div>
+  )
 }
 
 export default App;
