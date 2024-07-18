@@ -3,6 +3,7 @@ import { useEffect, useState } from 'react';
 import { Nav } from 'react-bootstrap'
 import { addItem } from '../store.js'
 import { useDispatch } from 'react-redux';
+import { useLike } from '../hooks/like.js'
 
 function Detail(props){
   const {id} = useParams();
@@ -13,6 +14,8 @@ function Detail(props){
   let [load, setLoad] = useState(false);
   let dispatch = useDispatch()
   let thisItem = props.shoes.find(x => x.id == id)
+  
+  let [like, addLike] = useLike()
   
   useEffect(()=>{
     let output = localStorage.getItem('watch')
@@ -44,7 +47,7 @@ function Detail(props){
       alert('그러지마세요')
     }
   }, [num])
-  
+    
   return(
   <div className={ 'container start '+load }>
     {
@@ -62,6 +65,7 @@ function Detail(props){
       </div>
       <div className="col-md-6">
         <h4 className="pt-5">{props.shoes[id].title}</h4>
+        {like} <span onClick={()=>{addLike()}}>💜</span>
         <p>{props.shoes[id].content}</p>
         <p>{props.shoes[id].price}</p>
 
@@ -102,7 +106,7 @@ function TabContent({tab, shoes}){
       setFade('')
     }
   }, [tab])
-  
+
   return (<div className={'start ' + fade}>
     { [<div>{shoes[0].title}</div>, <div>content 1</div>, <div>content 2</div>][tab] }
   </div>)

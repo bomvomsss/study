@@ -15,7 +15,13 @@ function App() {
   let [count, setCount] = useState(0);
   let [loading, setLoading] = useState(false);
   let [warnpop, setWarnpop] = useState(false);
+  let [name, setName] = useState('');
   
+  axios.get('/username.json')
+    .then((result)=>{
+      setName(result.data)
+    })
+
   useEffect(() => {
     let check = localStorage.getItem("watch");
     let info = JSON.parse(check)
@@ -122,6 +128,7 @@ function App() {
             </Nav.Link>
           </Nav>
           <Nav className="ms-auto">
+            { name }
               { result.isLoading ? '로딩중' : result.data.name }
           </Nav>
         </Container>
